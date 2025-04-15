@@ -11,8 +11,10 @@ const emit = defineEmits(['update']);
 const inputText = ref('');
 
 const addTask = () => {
+    if (!inputText.value.trim()) return;
+
     emit('update', {
-        title: inputText.value ? inputText.value : 'New task',
+        title: inputText.value,
         isDone: false
     });
     clearInput();
@@ -25,7 +27,9 @@ const clearInput = () => {
 </script>
 
 <template>
-    <input v-model="inputText" :placeholder="props.placeholder" />
+    <form @submit.prevent="addTask">
+        <input v-focus v-model="inputText" :placeholder="props.placeholder" />
+    </form>
     <button @click="addTask">Add item</button>
     <button @click="clearInput">Clean input</button>
 </template>

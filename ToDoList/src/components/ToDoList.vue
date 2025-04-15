@@ -15,6 +15,9 @@ const tasks = ref([
 ]);
 
 const updateFormData = (data) => {
+    console.log(data);
+    console.log('data');
+    console.log(tasks);
     tasks.value.push(data);
 };
 
@@ -56,7 +59,7 @@ onUnmounted(() => {
     <div>
         <TitleForm/>
         <FilterForm @filter="(data) => { filter = data; }"/>
-        <AddForm placeholder="Enter text" @update="(data) => updateFormData(data)" />
+        <AddForm placeholder="Enter text" @update="updateFormData" />
         <TaskForm
             v-if="tasks.length > 0"
             :tasks="tasks"
